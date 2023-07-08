@@ -1,5 +1,5 @@
 # Unit-2-Project Anime API
-Welcome to my Anime API. Here you will be able to login as a user and be able to create and store your favorite animes. 
+Welcome to my Anime API. Here you will be able to login as a user and be able to create and store your favorite animes. With this API, you will be able to create, update, and delete animes from your favorite section.
 If you ever need somewhere to store your favorite shows, this is the API than can do it for you.
 
 # Prerequisites
