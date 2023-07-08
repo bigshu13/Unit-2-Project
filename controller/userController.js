@@ -86,10 +86,12 @@ exports.loginUser = async (req, res) => {
     }
 }
 
-//exports.logoutUser = async (req, res) => {
-  //  try {
-    //    const user = await 
-    //} catch (error) {
-        
-    //}
-//}
+exports.deleteAllUser = async (req, res) => {
+    try {
+        await User.find().deleteMany()
+        res.json({message: 'Deleted all'})
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    } 
+}
+    

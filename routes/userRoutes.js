@@ -20,8 +20,9 @@ router.delete('/:id', userController.auth, userController.deleteUser)
 //this will login user
 router.post('/login', userController.auth, userController.loginUser)
 
-//this will logout user
-//router.post('logout', userController.auth, userController.logoutUser)
+//this will delete all users
+router.delete('/delete/all', userController.deleteAllUser)
+
 
 
 
