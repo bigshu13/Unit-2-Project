@@ -27,7 +27,7 @@ exports.updateAnime = async function(req, res){
 exports.deleteAnime = async function(req, res){
     try {
          await Anime.findOneAndDelete({ _id: req.params.id })
-        res.sendStatus(204)
+        res.json({message: 'Deleted Anime' })
     } catch (error) {
         res.status(400).json({ message: error.message})
     }

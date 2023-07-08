@@ -37,7 +37,7 @@ describe('testing anime endpoints', () => {
             .send({ title: 'bleach', genre: 'action', description: 'cool' });
             console.log(response.body, 'HELLO')
         expect(response.statusCode).toBe(200);
-        expect(response.body).toMatchObject({ title: 'bleach', genre: 'action', description: 'cool' }); 
+        expect(response.body.favorites.length).toBe(1); 
     });
 
     //testing the update route
@@ -75,8 +75,9 @@ describe('testing anime endpoints', () => {
         const response = await request(app)
             .delete(`/animes/${anime._id}`)
         //console.log(response.body, 'YEET')
-        expect(response.body.message).toEqual('Deleted Anime')
         expect(response.statusCode).toBe(200)
+        expect(response.body.message).toEqual('Deleted Anime')
+        
     });
 
     //testing the specified route
