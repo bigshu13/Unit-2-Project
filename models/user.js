@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { timeStamp } = require('console')
+const secret = process.env.SECRET_KEY
 
 const userSchema = new mongoose.Schema({
     name: {type: String, required: true},
@@ -14,9 +15,9 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.pre('save', async function(next){
-    this.modified('password')?
+    this.isModified('password')?
     this.password = await bcrypt.hash(this.password, 8):
-    null;
+    //null;
     next()
 })
 

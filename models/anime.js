@@ -3,9 +3,8 @@ const mongoose = require('mongoose')
 const animeSchema = new mongoose.Schema({
     title: {type: String, required: true},
     genre: {type: String, required: true},
-    rating: 4.5,
-    description: {type: String, required: false},
-    user: { type: Schema.Types.ObjectId, required: true, ref: 'User'}
+    rating: Number,
+    description: {type: String, required: false}
 },{
     timestamps: true
 }
