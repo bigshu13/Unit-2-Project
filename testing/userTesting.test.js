@@ -15,7 +15,7 @@ beforeAll(async () => {
 
 afterEach(async () => {
     await User.deleteMany();
-  });
+});
 
 afterAll(async () => {
     await mongoose.connection.close()
@@ -26,64 +26,78 @@ afterAll(async () => {
 describe('testing user endpoints', () => {
     test('Creation of new user', async () => {
         const response = await request(app)
-        .post('/users')
-        .send({ name: 'Shu', email: 'shu@aol.com', password: 'shumama'});
+            .post('/users')
+            .send({ name: 'Shu', email: 'shu@aol.com', password: 'shumama' });
         expect(response.statusCode).toBe(200);
-        expect(response.body.user).toMatchObject({ name: 'Shu', email: 'shu@aol.com'});
-      console.log(response, 'HELLO')  
+        expect(response.body.user).toMatchObject({ name: 'Shu', email: 'shu@aol.com' });
+        console.log(response, 'HELLO')
     });
-//testing the update route
+    //testing the update route
     test('updating of user', async () => {
         const user = new User({
             name: 'Shoe', email: 'shoe@aol.com', password: 'shupapi'
         })
         await user.save()
         console.log(user, 'WORLD')
+
         const token = await user.generateAuthTokens()
         const response = await request(app)
-        .put(`/users/${user._id}`)
-        .set('Authorization', `Bearer ${token}`)
-        .send({name: 'Shu', email: 'shu@aol.com', password: 'shumama'})
+            .put(`/users/${user._id}`)
+            .set('Authorization', `Bearer ${token}`)
+            .send({ name: 'Shu', email: 'shu@aol.com', password: 'shumama' })
         console.log(response.body, 'TRUEEE')
         expect(response.statusCode).toBe(200);
-        expect(response.body).toMatchObject({ name: 'Shu', email: 'shu@aol.com', password: 'shumama'});
-  });
-
-//testing the get users route
-test('Get the users', async () => {
-    const user = new User ({name: 'jorge', email: 'jorge@aol.com', password: 'JokerOP'})
-    await user.save()
-    const response = await request(app)
-    .get('/users')
-    console.log(response.body, 'CAPPP')
-    expect(response.statusCode).toBe(200)
+        expect(response.body).toMatchObject({ name: 'Shu', email: 'shu@aol.com', password: 'shumama' });
     });
 
-//testing the delete route
-test('delete the users', async () => {
-    const user = new User ({name: 'jorge', email: 'jorge@aol.com', password: 'JokerOP'})
-    await user.save()
-    const token = await user.generateAuthTokens()
-    const response = await request(app)
-    .delete(`/users/${user._id}`)
-    .set('Authorization', `Bearer ${token}`)
-    console.log(response.body, 'YEET')
-    expect(response.body.message).toEqual('Deleted User')
-    expect(response.statusCode).toBe(200)
+    //testing the get users route
+    test('Get the users', async () => {
+        const user = new User({ name: 'jorge', email: 'jorge@aol.com', password: 'JokerOP' })
+        await user.save()
+
+        const response = await request(app)
+            .get('/users')
+        console.log(response.body, 'CAPPP')
+        expect(response.statusCode).toBe(200)
     });
 
-//testing the specified route
-test('get specified user', async () => {
-    const user = new User ({name: 'jorge', email: 'jorge@aol.com', password: 'JokerOP'})
-    await user.save()
-    const token = await user.generateAuthTokens()
-    const response = await request(app)
-    .get(`/users/${user._id}`)
-    .set('Authorization', `Bearer ${token}`)
-    expect(response.statusCode).toBe(200)
+    //testing the delete route
+    test('delete the users', async () => {
+        const user = new User({ name: 'jorge', email: 'jorge@aol.com', password: 'JokerOP' })
+        await user.save()
+
+        const token = await user.generateAuthTokens()
+        const response = await request(app)
+            .delete(`/users/${user._id}`)
+            .set('Authorization', `Bearer ${token}`)
+        console.log(response.body, 'YEET')
+        expect(response.body.message).toEqual('Deleted User')
+        expect(response.statusCode).toBe(200)
     });
 
-test('testing the login route', async () => {
-    
-})    
+    //testing the specified route
+    test('get specified user', async () => {
+        const user = new User({ name: 'jorge', email: 'jorge@aol.com', password: 'JokerOP' })
+        await user.save()
+
+        const token = await user.generateAuthTokens()
+        const response = await request(app)
+            .get(`/users/${user._id}`)
+            .set('Authorization', `Bearer ${token}`)
+        expect(response.statusCode).toBe(200)
+    });
+
+    test('It should login a user', async () => {
+        const user = new User({ name: 'Johnny Bravo', email: 'johnnyB@cn.com', password: 'momma' })
+        await user.save()
+
+        const token = await user.generateAuthTokens()
+        const response = await request(app)
+            .post('/users/login')
+            .set('Authorization', `Bearer ${token}`)
+            .send({ email: 'johnnyB@cn.com', password: 'momma' })
+
+        expect(response.statusCode).toBe(200)
+        expect(response.body.message).toEqual('Logged In')
+    })
 });

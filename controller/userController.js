@@ -80,6 +80,7 @@ exports.loginUser = async (req, res) => {
         if(!user || !await bcrypt.compare(req.body.password, user.password)){
             throw new error('Wrong Login Info')
         }
+        res.json({message: 'Logged In'})
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
