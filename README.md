@@ -31,4 +31,17 @@ If you ever need somewhere to store your favorite shows, this is the API than ca
   # Postman Testing
   To test routes in Postman, you will need to know there are two routes. "/users" and "/animes" are routes you will be putting in the postman to test. You will need 
   to use "http//:localhost:3000/" for the URL then you will add one the main routes above.
+
+  # ERD Diagram
+
+  https://lucid.app/lucidchart/2bbce1da-c4a3-4902-aee0-304ce65f1dd0/edit?viewport_loc=-1054%2C234%2C1820%2C1036%2C0_0&invitationId=inv_022bb5db-0d01-4d20-b553-5590a887c792
   
+![Blank diagram](https://github.com/bigshu13/Unit-2-Project/assets/127646851/0099558c-1eac-404a-864b-20b6e62d53f1)
+
+
+# Wireframe
+![API image](https://github.com/bigshu13/Unit-2-Project/assets/127646851/84771e59-ed27-4c96-867a-6e1ac50c8e29)
+
+# API Trello
+https://trello.com/b/VxAwoVgS/api-trello
+
